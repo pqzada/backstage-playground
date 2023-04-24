@@ -39,9 +39,12 @@ import { SignInPage } from '@backstage/core-components';
 
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import LightIcon from '@material-ui/icons/WbSunny';
+// import LightIcon from '@material-ui/icons/WbSunny';
 import { apertureTheme } from './themes/aperture';
 import { simpleTheme } from './themes/simple';
+
+import { HomepageCompositionRoot } from '@backstage/plugin-home';
+import { HomePage } from './components/home/HomePage';
 
 const app = createApp({
   apis,
@@ -102,7 +105,9 @@ const app = createApp({
 
 const routes = (
   <FlatRoutes>
-    <Route path="/" element={<Navigate to="catalog" />} />
+    <Route path="/" element={<HomepageCompositionRoot />}>
+      <HomePage />
+    </Route>
     <Route path="/catalog" element={<CatalogIndexPage />} />
     <Route
       path="/catalog/:namespace/:kind/:name"
