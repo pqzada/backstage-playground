@@ -37,6 +37,12 @@ import { catalogEntityCreatePermission } from '@backstage/plugin-catalog-common/
 import { githubAuthApiRef } from '@backstage/core-plugin-api';
 import { SignInPage } from '@backstage/core-components';
 
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import LightIcon from '@material-ui/icons/WbSunny';
+import { apertureTheme } from './themes/aperture';
+import { simpleTheme } from './themes/simple';
+
 const app = createApp({
   apis,
   components: {
@@ -53,6 +59,30 @@ const app = createApp({
       />
     ),
   },
+  themes: [
+    {
+      id: 'aperture',
+      title: 'Aperture',
+      variant: 'light',
+      // icon: <LightIcon />,
+      Provider: ({ children }) => (
+        <ThemeProvider theme={apertureTheme}>
+          <CssBaseline>{children}</CssBaseline>
+        </ThemeProvider>
+      ),
+    },
+    {
+      id: 'simple',
+      title: 'Simple',
+      variant: 'light',
+      // icon: <LightIcon />,
+      Provider: ({ children }) => (
+        <ThemeProvider theme={simpleTheme}>
+          <CssBaseline>{children}</CssBaseline>
+        </ThemeProvider>
+      ),
+    },
+  ],
   bindRoutes({ bind }) {
     bind(catalogPlugin.externalRoutes, {
       createComponent: scaffolderPlugin.routes.root,
